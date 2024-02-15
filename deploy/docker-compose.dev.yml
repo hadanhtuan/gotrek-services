@@ -25,7 +25,7 @@ services:
       PGDATA: /data/postgres
     volumes:
       - ./init-db.sh:/docker-entrypoint-initdb.d/init-db.sh
-      - postgres:/data/postgres
+      - postgres-vl:/data/postgres
     ports:
       - ${DB_PORT}:5432
     networks:
@@ -85,7 +85,5 @@ networks:
 volumes:
   cache:
     driver: local
-  postgres:
-    driver: local
-  elastic:
+  postgres-vl:
     driver: local
