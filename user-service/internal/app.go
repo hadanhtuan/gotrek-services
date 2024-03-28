@@ -4,11 +4,10 @@ import (
 	"fmt"
 	"log"
 	"net"
+	"google.golang.org/grpc"
 	api "user-service/api"
 	userProto "user-service/proto/user"
-
 	pkg "github.com/hadanhtuan/go-sdk"
-	"google.golang.org/grpc"
 )
 
 func InitGRPCServer(app *pkg.App) error {
@@ -25,14 +24,12 @@ func InitGRPCServer(app *pkg.App) error {
 	s := grpc.NewServer()
 	userProto.RegisterUserServiceServer(s, &api.UserController{})
 
-	log.Printf("gRPC Server started on %s", userServiceHost)
+	log.Printf("Search Server started on %s", userServiceHost)
 
 	err = s.Serve(lis)
 	if err != nil {
 		panic(err)
 	}
-
-	fmt.Println("Server down")
 
 	return nil
 }
